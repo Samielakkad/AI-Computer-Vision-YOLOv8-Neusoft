@@ -1,14 +1,14 @@
 <div align="center">
 
-# YOLOv8 from Scratch — Autonomous-Driving Object Detection in PyTorch
+# AI + Computer Vision · YOLOv8 from Scratch @ 东软集团 NEUSOFT
 
-## 东软集团 · NEUSOFT
+### Autonomous-Driving Road-Object Detection — built, evaluated & debugged end-to-end in PyTorch
 
-### Built during my Computer-Vision internship at **Neusoft Corporation** — China's first listed software company
+**Computer-Vision internship at [Neusoft Corporation · 东软集团](https://www.neusoft.com/)** — China's first listed software company · 20+ years in autonomous-driving visual perception
 
-**A road-object perception model — built, evaluated, and debugged end-to-end. Not a wrapper around a library.**
+*A road-object perception model — not a wrapper around a library.*
 
-**Sami El Akkad** · Applied-AI / Computer-Vision · Summer 2024
+**Sami El Akkad** · Applied AI / Computer Vision · Summer 2024
 
 [![Neusoft](https://img.shields.io/badge/东软集团-Neusoft%20Corporation-C8102E)](https://www.neusoft.com/)
 [![Applied AI](https://img.shields.io/badge/Applied%20AI-Computer%20Vision-5E81AC)](#)
