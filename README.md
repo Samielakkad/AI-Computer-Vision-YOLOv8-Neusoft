@@ -10,6 +10,8 @@
 
 **Sami El Akkad** · Applied AI / Computer Vision · Summer 2024
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![tests](https://img.shields.io/badge/tests-pytest-0A9EDC)](tests/)
 [![Neusoft](https://img.shields.io/badge/东软集团-Neusoft%20Corporation-C8102E)](https://www.neusoft.com/)
 [![Applied AI](https://img.shields.io/badge/Applied%20AI-Computer%20Vision-5E81AC)](#)
 [![Framework](https://img.shields.io/badge/PyTorch-from%20scratch-EE4C2C)](https://pytorch.org/)
@@ -139,7 +141,11 @@ python voc_annotation.py   # build splits + annotation files from a VOC-format d
 python train.py            # train (hyper-params at the top of train.py)
 python predict.py          # detect — set `mode` for image / video / heatmap / ONNX
 python get_map.py          # evaluate (mAP, precision/recall)
+
+pytest -q                  # run the architecture tests (CPU, no weights needed)
 ```
+
+> CI runs these tests on every push (see the badge above), and a [`Dockerfile`](Dockerfile) gives a reproducible CPU environment: `docker build -t yolov8 . && docker run yolov8`.
 
 ## What this project demonstrates
 
