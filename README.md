@@ -11,7 +11,7 @@
 **Sami El Akkad** · Applied AI / Computer Vision · Summer 2024
 
 [![CI](https://github.com/Samielakkad/AI-Computer-Vision-YOLOv8-Neusoft/actions/workflows/ci.yml/badge.svg)](https://github.com/Samielakkad/AI-Computer-Vision-YOLOv8-Neusoft/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: All Rights Reserved](https://img.shields.io/badge/License-All_Rights_Reserved-red.svg)](LICENSE)
 [![Neusoft](https://img.shields.io/badge/东软集团-Neusoft%20Corporation-C8102E)](https://www.neusoft.com/)
 [![Applied AI](https://img.shields.io/badge/Applied%20AI-Computer%20Vision-5E81AC)](#)
 [![Framework](https://img.shields.io/badge/PyTorch-from%20scratch-EE4C2C)](https://pytorch.org/)
@@ -169,3 +169,8 @@ pytest -q                  # run the architecture tests (CPU, no weights needed)
 <div align="center">
 Built from scratch · debugged end-to-end · measured like a product.
 </div>
+
+
+---
+
+**License — All rights reserved.** This repository is shared for review only. Please **contact me before using any part of it** for any purpose. See [LICENSE](LICENSE).
