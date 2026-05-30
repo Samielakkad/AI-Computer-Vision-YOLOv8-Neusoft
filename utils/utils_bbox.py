@@ -115,8 +115,8 @@ class DecodeBox:
                 self.input_shape[0],
             ]
         ).to(
-            y.device()
-        )  # type: ignore
+            y.device
+        )  # device est un attribut, pas une méthode — pas de parenthèses
         return y
 
     # yolo_current_boxes
@@ -233,10 +233,12 @@ class DecodeBox:
 
                 # Premier passage sur cette image : output[i] est encore None, on l'initialise
                 # directement. Passages suivants (autres classes) : on concatène.
-                output = (
+                # IMPORTANT : on écrit dans output[i], PAS dans output — sinon on écrase
+                # la liste de résultats entière par le tenseur d'une seule classe.
+                output[i] = (
                     max_detections
                     if output[i] is None
-                    else torch.cat((output[i], max_detections))  # type: ignore
+                    else torch.cat((output[i], max_detections))
                 )
 
             if output[i] is not None:
@@ -244,15 +246,19 @@ class DecodeBox:
                 # On reconstruit (cx, cy) et (w, h) depuis les coins xyxy pour pouvoir
                 # appeler yolo_current_boxes qui attend ce format.
                 # [:, 0:2] = x1y1 (coin supérieur-gauche), [:, 2:4] = x2y2 (coin inférieur-droit).
+                # Centre = (x1 + x2) / 2 — bien parenthéser, sinon on calcule
+                # x1 + x2/2 et toutes les boxes partent en vrille.
                 box_xy, box_wh = (
-                    output[i][:, 0:2] + output[i][:, 2:4] / 2,  # type: ignore
-                    output[i][:, 2:4] - output[i][:, 0:2],  # type: ignore
+                    (output[i][:, 0:2] + output[i][:, 2:4]) / 2,
+                    output[i][:, 2:4] - output[i][:, 0:2],
                 )
 
-                output[i][:, :4] = self.yolo_current_boxes(  # type: ignore
+                output[i][:, :4] = self.yolo_current_boxes(
                     box_xy, box_wh, input_shape, image_shape, letterbox_image
                 )
-                return output
+
+        # return APRÈS la boucle : on a traité toutes les images du batch.
+        return output
 
 
 if __name__ == "__main__":

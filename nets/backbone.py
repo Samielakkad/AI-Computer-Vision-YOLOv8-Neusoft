@@ -153,10 +153,14 @@ class Backbone(nn.Module):
         )
         # dark5 : downsample x2 + C2f + SPPF — 512, 40, 40 => 1024*deep_mul, 20, 20
         # stride 32 — grands objets ; SPPF agrandit le champ récepteur ici
-        # sans perdre encore de résolution spatiale
+        # sans perdre encore de résolution spatiale.
+        # NB : le dernier stage utilise base_depth (et non un nombre fixe de
+        # bottlenecks) — c'est le schéma de profondeur standard de YOLOv8 [3,6,6,3],
+        # et c'est CE qui rend le backbone compatible avec les poids pré-entraînés
+        # yolov8_s.pth et mon checkpoint best_epoch_weights.pth.
         self.dark5 = nn.Sequential(
             Conv(base_channels * 8, int(base_channels * 16 * deep_mul), 3, 2),
-            C2f(int(base_channels * 16 * deep_mul), int(base_channels * 16 * deep_mul), 2),
+            C2f(int(base_channels * 16 * deep_mul), int(base_channels * 16 * deep_mul), base_depth),
             SPPF(
                 int(base_channels * 16 * deep_mul),
                 int(base_channels * 16 * deep_mul),

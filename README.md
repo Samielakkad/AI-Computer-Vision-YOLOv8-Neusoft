@@ -36,6 +36,19 @@ detection stack is transparent and inspectable:
 Trained on a **20-class PASCAL-VOC-format dataset (~21k images)** at 640×640, using the
 **YOLOv8-s** variant (~11M parameters).
 
+## It runs
+
+End-to-end detection on a real street scene — the trained checkpoint loaded, decoded and
+drawn by the code in this repo:
+
+<div align="center">
+<img src="figures/detection_sample.png" width="640" alt="YOLOv8 detecting cars on a street scene">
+</div>
+
+*Output of `predict.py` on `img/street.jpg`. The detector localises the cars with high
+confidence. (The checkpoint comes from a short proof-of-pipeline training run, so it is
+confident on the dominant class here rather than every object in the scene.)*
+
 ## Architecture
 
 ![YOLOv8 architecture](figures/yolov8_architecture.png)
@@ -144,9 +157,14 @@ TensorBoard logging · ONNX export.
 - This is **internship work**: the goal was to implement and understand the full YOLOv8 stack,
   not to chase a leaderboard number. Training runs were short.
 - Cleanup done while open-sourcing it: paths made **relative/portable**, duplicate and
-  typo-named files removed, the dead code stripped, comments translated to **French**, the
-  truncated `get_map.py` evaluation body completed, and a quote-corruption bug in
-  `utils_map.py` (which had silently broken mAP evaluation) fixed.
+  typo-named files removed, dead code stripped, comments translated to **French**, and the
+  truncated `get_map.py` evaluation body completed.
+- **Bugs found and fixed while making it actually run end-to-end** (the inference path had
+  never executed cleanly before): a `dark5` depth mismatch that stopped the model loading its
+  own weights; a `.device()` call that should have been an attribute; an NMS accumulator
+  writing to the wrong variable; a missing parenthesis in the xyxy→centre conversion that
+  sent every box out of bounds; and a quote-corruption bug in `utils_map.py` that had silently
+  broken mAP evaluation. The detection above is the result.
 
 ## Author
 
