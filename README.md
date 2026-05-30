@@ -2,10 +2,15 @@
 
 # YOLOv8 from Scratch — Autonomous-Driving Object Detection in PyTorch
 
-### A road-object perception model **built, evaluated, and debugged end-to-end** — not a wrapper around a library
+## 东软集团 · NEUSOFT
 
-**Sami El Akkad** · Applied-AI / Computer-Vision Project · **Neusoft** Internship, Summer 2024
+### Built during my Computer-Vision internship at **Neusoft Corporation** — China's first listed software company
 
+**A road-object perception model — built, evaluated, and debugged end-to-end. Not a wrapper around a library.**
+
+**Sami El Akkad** · Applied-AI / Computer-Vision · Summer 2024
+
+[![Neusoft](https://img.shields.io/badge/东软集团-Neusoft%20Corporation-C8102E)](https://www.neusoft.com/)
 [![Applied AI](https://img.shields.io/badge/Applied%20AI-Computer%20Vision-5E81AC)](#)
 [![Framework](https://img.shields.io/badge/PyTorch-from%20scratch-EE4C2C)](https://pytorch.org/)
 [![Domain](https://img.shields.io/badge/domain-autonomous%20driving-2E86AB)](#)
@@ -51,6 +56,16 @@ End-to-end detection on a real street scene — checkpoint loaded, decoded and d
 
 A complete YOLOv8 detector for **road-object perception** — vehicles, pedestrians, cyclists and other street objects — the kind of computer-vision model used in **autonomous-driving and ADAS** research. Trained on a **20-class PASCAL-VOC-format dataset (~21k images)** at 640×640 using the **YOLOv8-s** variant (~11M parameters).
 
+## Why I built this — and what Neusoft uses it for
+
+> **About Neusoft (东软集团).** Founded in 1991 in Shenyang, **Neusoft Corporation** is **China's first listed software company** and one of the country's largest IT-services groups — **~20,000 employees**, operations across China, Japan, Europe, the US and Malaysia, and clients in 100+ countries. It built **China's first home-grown CT scanner** (1996) and runs the nation's **largest cloud-hospital network** (500+ tertiary hospitals, 700M+ people). Its **intelligent-vehicle** arm, **Neusoft Reach (东软睿驰)**, has **20+ years of R&D in autonomous-driving AI visual-perception algorithms** and ships **mass-production ADAS** in passenger cars.
+
+**Why object detection is the project.** Before a car can brake, steer or park itself, it has to *see* — to find every vehicle, pedestrian and cyclist in the camera frame, in real time. That perception layer is the foundation the entire autonomous-driving stack is built on. This project implements that layer from first principles: a YOLOv8 detector that turns a raw road image into labelled, localised objects.
+
+**Where this fits at Neusoft.** Camera-based road-object detection is core perception for the products Neusoft's intelligent-driving business ships — its **front ADAS** modules (built on Ambarella vision SoCs, in mass production since 2021), **driver-monitoring systems**, and **L2-and-above** assisted-driving features up to navigation-on-autopilot (NOA), now part of Neusoft's **A³ Cockpit-Driving-Parking** platform launched under its 2024 intelligent-solutions strategy. My internship sat on the R&D side of exactly this: training and evaluating detectors that recognise road objects with high precision — which is why I rebuilt YOLOv8 end-to-end rather than treating it as a black box.
+
+*Sources: [Neusoft — company profile](https://en.wikipedia.org/wiki/Neusoft) · [Neusoft Reach × Ambarella, mass-production ADAS (2024)](https://www.edge-ai-vision.com/2024/04/neusoft-reach-and-ambarella-forge-strategic-partnership-to-drive-advancements-in-autonomous-driving-and-intelligent-automotive-technology/) · [Neusoft AI-powered intelligent mobility, Auto Shanghai 2025](https://www.neusoft.com/neusoft-launches-three-product-portfolios-for-ai-powered-intelligent-mobility-at-auto-shanghai-2025/).*
+
 ## Architecture
 
 ![YOLOv8 architecture](figures/yolov8_architecture.png)
@@ -94,6 +109,8 @@ A model you can't measure is a model you can't trust, so the repo ships a full e
 - **VOC mAP@0.5** and **COCO mAP@0.5:0.95**,
 - **per-class precision / recall** at any confidence threshold,
 - prediction vs. ground-truth comparison over the held-out test set.
+
+One command — `python get_map.py` — runs the full sweep over the **2,151-image held-out test split** and writes the per-class AP table plus precision/recall curves.
 
 **The part I'm proud of:** when I went to evaluate, the metric came back **0** for every run. I traced it down — the mAP module had a character-encoding corruption that stopped it compiling at all, and `get_map.py` was missing its entire evaluation body. I fixed both. *Finding out **why** a metric is lying to you, and fixing it, is the core of doing AI well.*
 
