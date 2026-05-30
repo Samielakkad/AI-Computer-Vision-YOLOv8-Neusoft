@@ -53,7 +53,7 @@ End-to-end detection on a real street scene — checkpoint loaded, decoded and d
 | **Owned the entire loop** — dataset prep → training → evaluation → debugging → inference | The full *applied-AI / forward-deployed* skill set in one project |
 | **Debugged a broken inference + evaluation stack** to a working state | Exactly what shipping AI in the real world looks like — things break, you fix them |
 | **Built the measurement layer** (mAP, precision/recall, per-class) | Product-minded: I care whether the model is actually *good*, not just whether it runs |
-
+ 
 ## What it does
 
 A complete YOLOv8 detector for **road-object perception** — vehicles, pedestrians, cyclists and other street objects — the kind of computer-vision model used in **autonomous-driving and ADAS** research. Trained on a **20-class PASCAL-VOC-format dataset (~21k images)** at 640×640 using the **YOLOv8-s** variant (~11M parameters).
