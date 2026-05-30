@@ -1,0 +1,30 @@
+# --- Dataset (trop lourd, ~21k images — à régénérer localement) ---
+VOCdevkit/
+map_out/
+img_out/
+img_crop/
+
+# --- Poids / checkpoints (jamais dans git) ---
+*.pth
+*.pt
+*.onnx
+pth/
+utils/pth/
+logs/
+
+# --- Fichiers d'annotation générés (recréés par voc_annotation.py) ---
+2007_train.txt
+2007_val.txt
+2007_test.txt
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# --- IDE / OS ---
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
