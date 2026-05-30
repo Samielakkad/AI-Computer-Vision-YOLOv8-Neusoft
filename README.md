@@ -10,8 +10,8 @@
 
 **Sami El Akkad** · Applied AI / Computer Vision · Summer 2024
 
+[![CI](https://github.com/Samielakkad/AI-Computer-Vision-YOLOv8-Neusoft/actions/workflows/ci.yml/badge.svg)](https://github.com/Samielakkad/AI-Computer-Vision-YOLOv8-Neusoft/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![tests](https://img.shields.io/badge/tests-pytest-0A9EDC)](tests/)
 [![Neusoft](https://img.shields.io/badge/东软集团-Neusoft%20Corporation-C8102E)](https://www.neusoft.com/)
 [![Applied AI](https://img.shields.io/badge/Applied%20AI-Computer%20Vision-5E81AC)](#)
 [![Framework](https://img.shields.io/badge/PyTorch-from%20scratch-EE4C2C)](https://pytorch.org/)
