@@ -25,15 +25,11 @@
 
 ## TL;DR
 
-I built a **self-driving-style object detector** — the kind of model that spots cars, pedestrians and cyclists from a camera — **from zero** in PyTorch, then took it all the way to a **working, measured, deployable** state.
+A **self-driving-style object detector** — cars, pedestrians and cyclists from a camera — implemented **from zero** in PyTorch and taken to a working, measured, deployable state.
 
-Three things make this more than a tutorial:
-
-1. 🧱 **Built from scratch, not imported.** The network, the loss function, the label assignment and the training loop are all written by hand — I understand every layer, not just the API call.
-2. 🔧 **I made it actually run end-to-end.** Taking the pipeline to a clean working state meant tracking down and fixing **five real bugs** across the model-loading, decoding and evaluation code — the kind of in-the-weeds debugging a *forward-deployed* engineer does in the field.
-3. 📏 **I measure it like a product.** It ships with a real **evaluation harness** (mAP@0.5, per-class precision/recall) — and I found and fixed a defect that had been silently reporting the accuracy as **zero**.
-
-> **Skills on display:** Applied AI · Computer Vision · PyTorch · end-to-end ownership (data → train → evaluate → debug → deploy) · model evaluation & quality.
+- 🧱 **Built from scratch, not imported.** The network, loss function, label assignment and training loop are all hand-written.
+- 🔧 **Runs end-to-end.** Bringing the pipeline to a clean working state meant tracking down and fixing **five bugs** across model-loading, decoding and evaluation (the encoding/`get_map.py` story is below).
+- 📏 **Measured.** Ships an **evaluation harness** (mAP@0.5, per-class precision/recall), including a fix for a defect that had been silently reporting accuracy as **zero**.
 
 ## It runs
 
@@ -45,15 +41,6 @@ End-to-end detection on a real street scene — checkpoint loaded, decoded and d
 
 *Output of `predict.py` on a city street — the detector localises the vehicles with high confidence. (From a short proof-of-pipeline training run, so it is confident on the dominant road class here rather than every object in the frame.)*
 
-## Why this is more than a tutorial project
-
-| What I did | Why a recruiter should care |
-|---|---|
-| **Built YOLOv8 from scratch** — backbone, neck, decoupled head, DFL, full loss | Deep technical command of modern object detection, not just library usage |
-| **Owned the entire loop** — dataset prep → training → evaluation → debugging → inference | The full *applied-AI / forward-deployed* skill set in one project |
-| **Debugged a broken inference + evaluation stack** to a working state | Exactly what shipping AI in the real world looks like — things break, you fix them |
-| **Built the measurement layer** (mAP, precision/recall, per-class) | Product-minded: I care whether the model is actually *good*, not just whether it runs |
- 
 ## What it does
 
 A complete YOLOv8 detector for **road-object perception** — vehicles, pedestrians, cyclists and other street objects — the kind of computer-vision model used in **autonomous-driving and ADAS** research. Trained on a **20-class PASCAL-VOC-format dataset (~21k images)** at 640×640 using the **YOLOv8-s** variant (~11M parameters).
@@ -147,13 +134,6 @@ pytest -q                  # run the architecture tests (CPU, no weights needed)
 
 > CI runs these tests on every push (see the badge above), and a [`Dockerfile`](Dockerfile) gives a reproducible CPU environment: `docker build -t yolov8 . && docker run yolov8`.
 
-## What this project demonstrates
-
-- **Applied AI / Computer Vision** — modern object detection implemented and understood end-to-end, not abstracted behind a library.
-- **Forward-deployed engineering** — taking an imperfect codebase and *making it work*: loading, decoding, evaluating, debugging until it runs cleanly in the real world.
-- **Product & evaluation thinking** — building the measurement layer and insisting on knowing whether the model is genuinely good.
-- **Ownership** — one person, the whole pipeline: data, model, training, metrics, inference.
-
 ## Tech stack
 
 `Python` · `PyTorch` · `NumPy` · `OpenCV` · `Pillow` · `matplotlib` · `tqdm` · VOC-format data · TensorBoard logging · ONNX export.
@@ -167,7 +147,7 @@ pytest -q                  # run the architecture tests (CPU, no weights needed)
 ---
 
 <div align="center">
-Built from scratch · debugged end-to-end · measured like a product.
+Built from scratch · debugged end-to-end · measured with a real mAP harness.
 </div>
 
 
