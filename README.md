@@ -155,4 +155,4 @@ Built from scratch · debugged end-to-end · measured with a real mAP harness.
 
 **License — All rights reserved.** This repository is shared for review only. Please **contact me before using any part of it** for any purpose. See [LICENSE](LICENSE).
 
-<!-- last updated: June 2026 -->
+<!-- last updated: June 2026 · pytorch 2.x compatible -->
